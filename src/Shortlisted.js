@@ -31,18 +31,22 @@ class Shortlisted extends React.Component {
             {this.props.shortList.map(x => {
               let j = JSON.parse(JSON.parse(x));
               return (
+                <>
                 <div className="card1">
                   <img
                     src={j.Image}
                     alt="Avatar"
                     style={{ width: 400, height: 300 }}
                   />
-                  <div className="container" style={{ width: 400 }}>
+                  
+                  <div className="container" style={{ width: 300 }}>
                     <h4 className="text-center">
                       <b>{j.name}</b>
                     </h4>
                   </div>
-                </div>
+                  </div>
+                  </>
+                
               );
             })}
             {this.props.shortList.length == 0 && (
