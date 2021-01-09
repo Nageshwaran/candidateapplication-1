@@ -21,8 +21,8 @@ class CandidateDetails extends React.Component {
     super(props);
     this.state = {
       candidatedetails: this.props.location.state.detail,
-      shortlistdisabled: false,
-      rejectedlistdisabled: false
+      shortlistdisabled: "false",
+      rejectedlistdisabled: "false"
     };
   }
 
@@ -31,14 +31,14 @@ class CandidateDetails extends React.Component {
     if (this.props.shortListval.length > 0) {
       this.props.shortListval.filter(d => {
         if (JSON.parse(JSON.parse(d)).id == data.id) {
-          this.setState({ shortlistdisabled: true });
+          this.setState({ shortlistdisabled: "hide" });
         }
       });
     }
     if (this.props.rejectedval.length > 0) {
       this.props.rejectedval.filter(d => {
         if (JSON.parse(JSON.parse(d)).id == data.id) {
-          this.setState({ rejectedlistdisabled: true });
+          this.setState({ rejectedlistdisabled: "hide" });
         }
       });
     }
@@ -65,42 +65,70 @@ class CandidateDetails extends React.Component {
   };
   render() {
     const { Image, name, id } = JSON.parse(this.state.candidatedetails);
+    const rejbutton = this.state.rejectedlistdisabled;
+    const shortbutton = this.state.shortlistdisabled;
     return (
       <div className="container App">
         <h4 style={{ "text-align": "center" }}>Candidate Details</h4>
 
-        <div className="card2 mx-auto d-block" style={{ align: "center" }}>
+        {/*} <div className="card2 mx-auto d-block" style={{ align: "center" }}>
           <img
             src={Image}
             alt="Avatar"
-            style={{ align: "center", width: 250, height: 250 }}
+            style={{ align: "center", width: 250, height: 150 }}
           />
           <div style={{ "text-align": "center" }}>
             <h4>
-              <b>{name}</b>
+              <b style={{ color: "red" }}>{name}</b>
             </h4>
+          </div>
+        </div>*/}
+        <div
+          className="card2  mx-auto"
+          style={{
+            align: "center",
+            borderColor: "black",
+            backgroundColor: "lightblue"
+          }}
+        >
+          <img
+            src={Image}
+            alt="Avatar"
+            style={{ align: "center", width: 330, height: 150 }}
+          />
+          <div className="container" style={{ "text-align": "center" }}>
+            <b style={{ color: "red" }}>Name:</b>
+            <span style={{ color: "saffron" }}> {name}</span>
+            <br />
+            <b style={{ color: "red" }}>ID:</b>
+            <span style={{ color: "saffron" }}> {id}</span>
           </div>
         </div>
         <div class="text-center">
-          <button
-            def1={JSON.stringify(this.state.candidatedetails)}
-            type="button"
-            disabled={this.state.shortlistdisabled}
-            onClick={e => this.MoreInfo2(e)}
-            className="btn btn-success"
-          >
-            ShortList
-          </button>{" "}
-          &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          <button
-            def2={JSON.stringify(this.state.candidatedetails)}
-            type="button"
-            disabled={this.state.rejectedlistdisabled}
-            onClick={e => this.MoreInfo3(e)}
-            className="btn btn-danger"
-          >
-            Reject
-          </button>
+          {this.state.shortlistdisabled == "false" && (
+            <button
+              def1={JSON.stringify(this.state.candidatedetails)}
+              type="button"
+              // disabled={this.state.shortlistdisabled}
+              onClick={e => this.MoreInfo2(e)}
+              className="btn btn-success"
+              //style={{ display: {shortbutton} }}
+            >
+              ShortList
+            </button>
+          )}
+          {this.state.rejectedlistdisabled == "false" && (
+            <button
+              def2={JSON.stringify(this.state.candidatedetails)}
+              type="button"
+              //disabled={this.state.rejectedlistdisabled}
+              onClick={e => this.MoreInfo3(e)}
+              className="btn btn-danger ml-1"
+              //style={{ display: {rejbutton} }}
+            >
+              Reject
+            </button>
+          )}
         </div>
       </div>
     );

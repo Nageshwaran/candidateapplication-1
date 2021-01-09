@@ -51,39 +51,62 @@ class Candidate extends React.Component {
 
     return (
       <div className="container App">
-        <h4 style={{ "text-align": "center" }}>Candidate Details</h4>
-        <input
-          className="form-control "
-          type="text"
-          placeholder="Search with Name"
-          onChange={e => this.changehandler(e)}
-          aria-label="Search"
-        />
-
+        <h4 style={{ "text-align": "center","color":"red" }}>Candidates List</h4>
+        <div className="row">
+          <div className="col-lg-7">
+            <input
+              className="form-control ml-4"
+              type="text"
+              placeholder="Search with Name"
+              onChange={e => this.changehandler(e)}
+              aria-label="Search"
+            />
+          </div>
+          <div  className="ml-4" style={{ "text-align": "right" }}>
+            <button
+              type="button"
+              onClick={this.shortlistedpage}
+              className="btn btn-success"
+            >
+              ShortListed List
+            </button>{" "}
+            &nbsp;&nbsp;
+            <button
+              type="button"
+              onClick={this.rejectedpage}
+              className="btn btn-danger"
+            >
+              Rejected List
+            </button>
+          </div>
+        </div>
         <div className="container">
           <div className="row">
             {userListfilter.map(x => (
               <div
-                className="card mx-auto d-block"
+                className="card  mt-3 ml-4"
                 def={JSON.stringify(x)}
-                style={{ align: "center" }}
+                style={{
+                  align: "center",
+                  borderColor: "black",
+                  backgroundColor: "lightblue"
+                }}
                 onClick={e => this.MoreInfo(e)}
               >
                 <img
                   src={x.Image}
                   alt="Avatar"
-                  style={{ width: 150, height: 200 }}
+                  style={{ width: "auto", height: 150 }}
                 />
                 <div className="container">
-                  <h4>
-                    <b>{x.name}</b>
-                  </h4>
+                  <b style={{ color: "red" }}>Name:</b>
+                  <span style={{ color: "saffron" }}> {x.name}</span>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
+        {/*{" "}
         <div class="text-center">
           <button
             type="button"
@@ -101,6 +124,7 @@ class Candidate extends React.Component {
             Rejected List
           </button>
         </div>
+        */}
       </div>
     );
   }
